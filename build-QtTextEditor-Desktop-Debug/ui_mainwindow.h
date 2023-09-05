@@ -17,7 +17,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTextBrowser>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -29,7 +29,7 @@ public:
     QWidget *centralwidget;
     QGridLayout *gridLayout_3;
     QGridLayout *gridLayout;
-    QTextBrowser *textBrowser;
+    QTextEdit *Page;
     QMenuBar *menubar;
     QMenu *menuFichier;
     QStatusBar *statusbar;
@@ -47,10 +47,10 @@ public:
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        textBrowser = new QTextBrowser(centralwidget);
-        textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
+        Page = new QTextEdit(centralwidget);
+        Page->setObjectName(QString::fromUtf8("Page"));
 
-        gridLayout->addWidget(textBrowser, 1, 0, 1, 1);
+        gridLayout->addWidget(Page, 0, 0, 1, 1);
 
 
         gridLayout_3->addLayout(gridLayout, 0, 0, 1, 1);
@@ -78,6 +78,9 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         actionOuvrir->setText(QCoreApplication::translate("MainWindow", "Ouvrir", nullptr));
+#if QT_CONFIG(whatsthis)
+        actionOuvrir->setWhatsThis(QCoreApplication::translate("MainWindow", "<html><head/><body><p>Ouvrir un fichier d\303\251j\303\240 existant</p></body></html>", nullptr));
+#endif // QT_CONFIG(whatsthis)
         menuFichier->setTitle(QCoreApplication::translate("MainWindow", "Fichier", nullptr));
     } // retranslateUi
 

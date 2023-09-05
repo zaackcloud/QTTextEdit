@@ -17,8 +17,8 @@
    <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="0">
      <layout class="QGridLayout" name="gridLayout">
-      <item row="1" column="0">
-       <widget class="QTextBrowser" name="textBrowser"/>
+      <item row="0" column="0">
+       <widget class="QTextEdit" name="Page"/>
       </item>
      </layout>
     </item>
@@ -45,6 +45,9 @@
   <action name="actionOuvrir">
    <property name="text">
     <string>Ouvrir</string>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ouvrir un fichier déjà existant&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </action>
  </widget>
