@@ -72,6 +72,7 @@
      <string>Fichier</string>
     </property>
     <addaction name="actionOuvrir"/>
+    <addaction name="actionEnregistrer"/>
    </widget>
    <addaction name="menuFichier"/>
   </widget>
@@ -82,6 +83,11 @@
    </property>
    <property name="whatsThis">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ouvrir un fichier déjà existant&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionEnregistrer">
+   <property name="text">
+    <string>Enregistrer</string>
    </property>
   </action>
  </widget>

@@ -27,6 +27,7 @@ class Ui_MainWindow
 {
 public:
     QAction *actionOuvrir;
+    QAction *actionEnregistrer;
     QWidget *centralwidget;
     QGridLayout *gridLayout_3;
     QGridLayout *gridLayout;
@@ -46,6 +47,8 @@ public:
         MainWindow->resize(808, 598);
         actionOuvrir = new QAction(MainWindow);
         actionOuvrir->setObjectName(QString::fromUtf8("actionOuvrir"));
+        actionEnregistrer = new QAction(MainWindow);
+        actionEnregistrer->setObjectName(QString::fromUtf8("actionEnregistrer"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         gridLayout_3 = new QGridLayout(centralwidget);
@@ -85,6 +88,7 @@ public:
 
         menubar->addAction(menuFichier->menuAction());
         menuFichier->addAction(actionOuvrir);
+        menuFichier->addAction(actionEnregistrer);
 
         retranslateUi(MainWindow);
 
@@ -101,6 +105,7 @@ public:
 #if QT_CONFIG(whatsthis)
         actionOuvrir->setWhatsThis(QCoreApplication::translate("MainWindow", "<html><head/><body><p>Ouvrir un fichier d\303\251j\303\240 existant</p></body></html>", nullptr));
 #endif // QT_CONFIG(whatsthis)
+        actionEnregistrer->setText(QCoreApplication::translate("MainWindow", "Enregistrer", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Tab 1", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Tab 2", nullptr));
         menuFichier->setTitle(QCoreApplication::translate("MainWindow", "Fichier", nullptr));

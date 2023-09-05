@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include <QString>
+#include <QTextStream>
+#include <QFile>
+#include <QFileDialog>
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,16 +19,22 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void loadFile(const QString &fichier);
+
+
 
 
 private slots:
     void ouvrirFichier();
+    void fermetureTab(int tab);
+    void changeTitre();
+
 
 
 private:
     Ui::MainWindow *ui;
     QString currentFile;
+    void loadFile(const QString &fichier);
+    void saveFile(int tab);
 
 };
 #endif // MAINWINDOW_H
