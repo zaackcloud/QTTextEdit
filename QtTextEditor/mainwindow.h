@@ -16,9 +16,15 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void loadFile(const QString &fichier);
+
+
 private slots:
-    void ouvrir();
+    void ouvrirFichier();
+
+
 private:
     Ui::MainWindow *ui;
+    QString currentFile;
+
 };
 #endif // MAINWINDOW_H

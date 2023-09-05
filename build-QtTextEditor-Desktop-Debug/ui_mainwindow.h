@@ -17,6 +17,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
@@ -29,7 +30,11 @@ public:
     QWidget *centralwidget;
     QGridLayout *gridLayout_3;
     QGridLayout *gridLayout;
+    QTabWidget *tabWidget;
+    QWidget *tab;
     QTextEdit *Page;
+    QWidget *tab_2;
+    QTextEdit *textEdit;
     QMenuBar *menubar;
     QMenu *menuFichier;
     QStatusBar *statusbar;
@@ -47,10 +52,22 @@ public:
         gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         gridLayout = new QGridLayout();
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        Page = new QTextEdit(centralwidget);
+        tabWidget = new QTabWidget(centralwidget);
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        tab = new QWidget();
+        tab->setObjectName(QString::fromUtf8("tab"));
+        Page = new QTextEdit(tab);
         Page->setObjectName(QString::fromUtf8("Page"));
+        Page->setGeometry(QRect(-20, -10, 811, 511));
+        tabWidget->addTab(tab, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QString::fromUtf8("tab_2"));
+        textEdit = new QTextEdit(tab_2);
+        textEdit->setObjectName(QString::fromUtf8("textEdit"));
+        textEdit->setGeometry(QRect(-7, -1, 791, 501));
+        tabWidget->addTab(tab_2, QString());
 
-        gridLayout->addWidget(Page, 0, 0, 1, 1);
+        gridLayout->addWidget(tabWidget, 0, 0, 1, 1);
 
 
         gridLayout_3->addLayout(gridLayout, 0, 0, 1, 1);
@@ -71,6 +88,9 @@ public:
 
         retranslateUi(MainWindow);
 
+        tabWidget->setCurrentIndex(0);
+
+
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
@@ -81,6 +101,8 @@ public:
 #if QT_CONFIG(whatsthis)
         actionOuvrir->setWhatsThis(QCoreApplication::translate("MainWindow", "<html><head/><body><p>Ouvrir un fichier d\303\251j\303\240 existant</p></body></html>", nullptr));
 #endif // QT_CONFIG(whatsthis)
+        tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Tab 1", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Tab 2", nullptr));
         menuFichier->setTitle(QCoreApplication::translate("MainWindow", "Fichier", nullptr));
     } // retranslateUi
 
