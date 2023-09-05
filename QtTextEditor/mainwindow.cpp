@@ -7,8 +7,11 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->tabWidget->removeTab(0);
+    ui->tabWidget->removeTab(0);
     connect(ui->tabWidget, &QTabWidget::tabCloseRequested,this, &MainWindow::fermetureTab);
     connect(ui->actionOuvrir,&QAction::triggered ,this, &MainWindow::ouvrirFichier);
+    connect(ui->actionEnregistrer,&QAction::triggered,this,&MainWindow::EnregistrerFichier);
 
 }
 
@@ -22,9 +25,10 @@ void MainWindow::loadFile(const QString &fichier)
     ui->tabWidget->currentIndex();
     if (!fichier.isEmpty()){
         QFile texte(fichier);
-        if (texte.open(QIODevice::ReadOnly)){
+        if (texte.open(QIODevice::ReadWrite)){
             QTextStream in(&texte);
             QString contenu = in.readAll();
+            this->currentFile.append(&texte);
             texte.close();
 
             QTextEdit *modif = new QTextEdit;
@@ -44,6 +48,15 @@ void MainWindow::loadFile(const QString &fichier)
 
 void MainWindow::saveFile(int tab)
 {
+    qDebug()<<"enregistrement en cours";
+    QTextEdit *modif = qobject_cast<QTextEdit*>(ui->tabWidget->widget(tab));
+    QFile *fichier=this->currentFile.at(tab);
+    if(fichier->open(QFile::ReadWrite | QFile::Text)){
+        QTextStream sortie(fichier);
+        sortie<<modif->toPlainText();
+        fichier->close();
+    }
+
 
 }
 
@@ -53,6 +66,11 @@ void MainWindow::ouvrirFichier()
     QString fichier = QFileDialog::getOpenFileName(this);
     loadFile(fichier);
     qDebug()<<"fichier selectionné";
+}
+
+void MainWindow::EnregistrerFichier()
+{
+    saveFile(ui->tabWidget->currentIndex());
 }
 
 void MainWindow::fermetureTab(int tab)

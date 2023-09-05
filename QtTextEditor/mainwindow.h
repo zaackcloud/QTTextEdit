@@ -25,6 +25,7 @@ public:
 
 private slots:
     void ouvrirFichier();
+    void EnregistrerFichier();
     void fermetureTab(int tab);
     void changeTitre();
 
@@ -32,7 +33,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QString currentFile;
+    QList<QFile*> currentFile;
     void loadFile(const QString &fichier);
     void saveFile(int tab);
 
