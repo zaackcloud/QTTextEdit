@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionOuvrir,&QAction::triggered ,this, &MainWindow::ouvrirFichier);
     connect(ui->actionEnregistrer,&QAction::triggered,this,&MainWindow::EnregistrerFichier);
     connect(ui->actionRechercher,&QAction::triggered, this, &MainWindow::rechercher);
+    connect(ui->actionRemplacer,&QAction::triggered, this, &MainWindow::remplacer);
 
 }
 
@@ -119,6 +120,23 @@ void MainWindow::rechercher()
         if(chercher.isNull()) {
             QMessageBox::information(this, tr("Rechercher"), tr("L'expression \"%1\" n'apparaît pas dans le texte").arg(text));
         } else {
+            modif->setTextCursor(chercher);
+        }
+}
+
+void MainWindow::remplacer()
+{
+    QTextEdit *modif = qobject_cast<QTextEdit*>(ui->tabWidget->currentWidget());
+    QString text = QInputDialog::getText(this, tr("Remplacer"), tr("Entrez le texte à rechercher:"));
+    QString text2 = QInputDialog::getText(this, tr("Remplacer"), tr("Entrez le texte qui remplacera \"%1\" : ").arg(text));
+    modif->moveCursor(QTextCursor::Start);
+    QTextCursor chercher = modif->document()->find(text, modif->textCursor(), QTextDocument::FindWholeWords);
+        if(chercher.isNull()) {
+            QMessageBox::information(this, tr("Remplacer"), tr("L'expression \"%1\" n'apparaît pas dans le texte").arg(text));
+        } else {
+            chercher.insertText(text2);
+            modif->document()->find(text,chercher);
+            chercher = modif->document()->find(text2, modif->textCursor(), QTextDocument::FindWholeWords);
             modif->setTextCursor(chercher);
         }
 }

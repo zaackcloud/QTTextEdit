@@ -31,6 +31,7 @@ private slots:
     void changeTitre();
     void afficherCurseur();
     void rechercher();
+    void remplacer();
 
 
 

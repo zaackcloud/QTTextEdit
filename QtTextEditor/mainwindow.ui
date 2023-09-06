@@ -79,6 +79,7 @@
      <string>Outils</string>
     </property>
     <addaction name="actionRechercher"/>
+    <addaction name="actionRemplacer"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuOutils"/>
@@ -100,6 +101,11 @@
   <action name="actionRechercher">
    <property name="text">
     <string>Rechercher</string>
+   </property>
+  </action>
+  <action name="actionRemplacer">
+   <property name="text">
+    <string>Remplacer</string>
    </property>
   </action>
  </widget>
