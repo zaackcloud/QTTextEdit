@@ -28,6 +28,7 @@ private slots:
     void EnregistrerFichier();
     void fermetureTab(int tab);
     void changeTitre();
+    void afficherCurseur();
 
 
 
@@ -36,6 +37,7 @@ private:
     QList<QFile*> currentFile;
     void loadFile(const QString &fichier);
     void saveFile(int tab);
+
 
 };
 #endif // MAINWINDOW_H

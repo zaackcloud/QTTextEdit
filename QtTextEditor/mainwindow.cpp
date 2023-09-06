@@ -24,12 +24,12 @@ void MainWindow::loadFile(const QString &fichier)
 {
     ui->tabWidget->currentIndex();
     if (!fichier.isEmpty()){
-        QFile texte(fichier);
-        if (texte.open(QIODevice::ReadWrite)){
-            QTextStream in(&texte);
+        QFile *texte=new QFile(fichier);
+        if (texte->open(QIODevice::ReadWrite)){
+            QTextStream in(texte);
             QString contenu = in.readAll();
-            this->currentFile.append(&texte);
-            texte.close();
+            this->currentFile.append(texte);
+            texte->close();
 
             QTextEdit *modif = new QTextEdit;
             modif->setPlainText(contenu);
@@ -37,6 +37,7 @@ void MainWindow::loadFile(const QString &fichier)
             ui->tabWidget->addTab(modif, QFileInfo(fichier).fileName());
 
             connect(modif,&QTextEdit::textChanged,this,&MainWindow::changeTitre);
+            connect(modif,&QTextEdit::cursorPositionChanged,this,&MainWindow::afficherCurseur);
             ui->tabWidget->setTabsClosable(true);
         }
         else
@@ -51,11 +52,14 @@ void MainWindow::saveFile(int tab)
     qDebug()<<"enregistrement en cours";
     QTextEdit *modif = qobject_cast<QTextEdit*>(ui->tabWidget->widget(tab));
     QFile *fichier=this->currentFile.at(tab);
-    if(fichier->open(QFile::ReadWrite | QFile::Text)){
+    if(fichier->open(QFile::WriteOnly | QFile::Text)){
         QTextStream sortie(fichier);
         sortie<<modif->toPlainText();
         fichier->close();
     }
+    QString nom= ui->tabWidget->tabText(tab);
+    nom.chop(1);
+    ui->tabWidget->setTabText(tab,nom);
 
 
 }
@@ -91,6 +95,17 @@ void MainWindow::changeTitre()
     {
         ui->tabWidget->setTabText(tab, ui->tabWidget->tabText(tab) + "*");
     }
+}
+
+void MainWindow::afficherCurseur()
+{
+    int ligne,colonne;
+    QTextEdit *modif = qobject_cast<QTextEdit*>(ui->tabWidget->currentWidget());
+    QTextCursor curseur=modif->textCursor();
+    ligne=curseur.blockNumber();
+    colonne=curseur.columnNumber();
+
+    ui->statusbar->showMessage(tr("position %1 : %2").arg(ligne).arg(colonne));
 }
 
 
