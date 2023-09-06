@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QMessageBox>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -12,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->tabWidget, &QTabWidget::tabCloseRequested,this, &MainWindow::fermetureTab);
     connect(ui->actionOuvrir,&QAction::triggered ,this, &MainWindow::ouvrirFichier);
     connect(ui->actionEnregistrer,&QAction::triggered,this,&MainWindow::EnregistrerFichier);
+    connect(ui->actionRechercher,&QAction::triggered, this, &MainWindow::rechercher);
 
 }
 
@@ -106,6 +108,19 @@ void MainWindow::afficherCurseur()
     colonne=curseur.columnNumber();
 
     ui->statusbar->showMessage(tr("position %1 : %2").arg(ligne).arg(colonne));
+}
+
+void MainWindow::rechercher()
+{
+    QTextEdit *modif = qobject_cast<QTextEdit*>(ui->tabWidget->currentWidget());
+    QString text = QInputDialog::getText(this, tr("Rechercher"), tr("Entrez le texte à rechercher:"));
+    modif->moveCursor(QTextCursor::Start);
+    QTextCursor chercher = modif->document()->find(text, modif->textCursor(), QTextDocument::FindWholeWords);
+        if(chercher.isNull()) {
+            QMessageBox::information(this, tr("Rechercher"), tr("L'expression \"%1\" n'apparaît pas dans le texte").arg(text));
+        } else {
+            modif->setTextCursor(chercher);
+        }
 }
 
 

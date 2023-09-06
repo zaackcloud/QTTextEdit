@@ -74,7 +74,14 @@
     <addaction name="actionOuvrir"/>
     <addaction name="actionEnregistrer"/>
    </widget>
+   <widget class="QMenu" name="menuOutils">
+    <property name="title">
+     <string>Outils</string>
+    </property>
+    <addaction name="actionRechercher"/>
+   </widget>
    <addaction name="menuFichier"/>
+   <addaction name="menuOutils"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOuvrir">
@@ -88,6 +95,11 @@
   <action name="actionEnregistrer">
    <property name="text">
     <string>Enregistrer</string>
+   </property>
+  </action>
+  <action name="actionRechercher">
+   <property name="text">
+    <string>Rechercher</string>
    </property>
   </action>
  </widget>

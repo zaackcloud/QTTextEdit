@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QDebug>
+#include <QInputDialog>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,6 +30,7 @@ private slots:
     void fermetureTab(int tab);
     void changeTitre();
     void afficherCurseur();
+    void rechercher();
 
 
 
